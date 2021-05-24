@@ -1,1 +1,6 @@
-{}
+{
+  "baseUrl": "https://parabank.parasoft.com/parabank/index.htm",
+  "viewportWidth": 1280,
+  "viewportHeight": 720
+}
+
