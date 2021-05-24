@@ -1,0 +1,22 @@
+{
+  "name": "parabank-testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brodybayley/ParaBank-testing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brodybayley/ParaBank-testing/issues"
+  },
+  "homepage": "https://github.com/brodybayley/ParaBank-testing#readme",
+  "devDependencies": {
+    "cypress": "^7.3.0"
+  }
+}
