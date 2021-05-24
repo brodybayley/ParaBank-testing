@@ -1,5 +1,9 @@
 {
-  "baseUrl": "https://parabank.parasoft.com/parabank/index.htm",
+  "baseUrl": "https://parabank.parasoft.com/parabank",
+  "env": {
+    "username": "cypress test",
+    "password": ""
+  },
   "viewportWidth": 1280,
   "viewportHeight": 720
 }
