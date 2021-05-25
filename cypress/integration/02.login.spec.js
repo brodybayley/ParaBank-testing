@@ -12,7 +12,7 @@ describe("Logging In", () => {
     it("displays errors on login", () => {
       cy.get("input[name=username]").type("wrong username");
       cy.get("input[name=password]").type("wrong password");
-      cy.get("form").submit();
+      cy.get("form").contains("Log In").click();
 
       cy.get("p.error")
         .should("be.visible")
@@ -25,11 +25,14 @@ describe("Logging In", () => {
       //username and password pulled from cypress.env.json
       cy.get("input[name=username]").type(username);
       cy.get("input[name=password]").type(password);
-      cy.get("form").submit();
+      cy.get("form").contains("Log In").click();
 
       //should be redirected to overview page with welcome message on left panel
       cy.url().should("include", "/overview.htm");
-      cy.get("p").should("contain", `Welcome ${firstName} ${lastName}`);
+      cy.get(".smallText").should(
+        "contain",
+        `Welcome ${firstName} ${lastName}`
+      );
     });
   });
 });
