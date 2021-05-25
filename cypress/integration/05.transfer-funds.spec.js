@@ -18,4 +18,18 @@ describe("Transfer Funds", () => {
     cy.get("form").submit();
     cy.get("#amount\\.errors").should("contain", "The amount cannot be empty.");
   });
+
+  it("should not show an error if an amount is entered", () => {
+    cy.get("#leftPanel").contains("Transfer Funds").click();
+
+    cy.url().should("include", "/transfer.htm");
+    //timeout delay required in order to allow accounts to load or error message will appear. Added notes in ReadMe
+    cy.wait(500);
+    cy.get("#amount").type("3900");
+    cy.get("form").submit();
+    cy.get("h1").should("contain", "Transfer Complete!");
+    cy.get("span[id=amount]").should("not.have.value", "null");
+    cy.get("span[id=fromAccountId]").should("not.have.value", "null");
+    cy.get("span[id=toAccountId]").should("not.have.value", "null");
+  });
 });
