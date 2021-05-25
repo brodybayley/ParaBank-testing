@@ -10,7 +10,7 @@ describe("Open new account", () => {
     cy.get("form").contains("Log In").click();
   });
 
-  it("client is able to open a checkings account", () => {
+  it("should open a checkings account", () => {
     cy.get("ul").contains("Open New Account").click();
     cy.get("#type").select("0");
     cy.get("#type").should("have.value", "0");
@@ -27,7 +27,7 @@ describe("Open new account", () => {
       });
   });
 
-  it("client is able to open a savings account", () => {
+  it("should open a savings account", () => {
     cy.get("ul").contains("Open New Account").click();
     cy.get("#type").select("1");
     cy.get("#type").should("have.value", "1");

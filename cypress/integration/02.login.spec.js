@@ -21,7 +21,7 @@ describe("Logging In", () => {
       cy.url().should("include", "/login.htm");
     });
 
-    it("redirects to /overview.htm on successful login", () => {
+    it("Should redirect to /overview.htm on successful login", () => {
       //username and password pulled from cypress.env.json
       cy.get("input[name=username]").type(username);
       cy.get("input[name=password]").type(password);
