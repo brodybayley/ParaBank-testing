@@ -9,7 +9,7 @@ describe("Bill Pay", () => {
     cy.get("form").contains("Log In").click();
   });
 
-  it("displays errors when incomplete registration", () => {
+  it("displays errors when payee information left blank", () => {
     //Intentionally didn't input any values into fields so error messages would show
     cy.get("div[id=leftPanel]").contains("Bill Pay").click();
     cy.get("form").submit();
