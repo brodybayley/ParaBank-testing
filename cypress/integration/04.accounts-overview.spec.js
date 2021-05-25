@@ -23,5 +23,6 @@ describe("Accounts Overview", () => {
     cy.url().should("include", "/overview.htm");
     //Account number should be hyperlinked and take client to /activity page
     cy.get("#accountTable").find("a").should("be.visible");
+    cy.get("td").find(".ng-binding").should("not.have.value", "null");
   });
 });
