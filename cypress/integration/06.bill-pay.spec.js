@@ -28,6 +28,75 @@ describe("Bill Pay", () => {
     cy.url().should("include", "/billpay.htm");
   });
 
+  it("should display error message if account or amount starts with a letter instead of a number", () => {
+    //seems like the error should appear if there is a letter inputted at any point in the account or amount field, but error only appears if the first element is a number.
+    cy.get("div[id=leftPanel]").contains("Bill Pay").click();
+
+    cy.get("input[name=payee\\.name]").type("New Payee");
+    cy.get("input[name=payee\\.address\\.street]").type("1234 Happy Lane");
+    cy.get("input[name=payee\\.address\\.city]").type("Portland");
+    cy.get("input[name=payee\\.address\\.state]").type("OR");
+    cy.get("input[name=payee\\.address\\.zipCode]").type("92103");
+    cy.get("input[name=payee\\.phoneNumber]").type("1-888-486-4567");
+    cy.get("input[name=payee\\.accountNumber]").type("d23456789");
+    cy.get("input[name=verifyAccount]").type("d23456789");
+    cy.get("input[name=amount]").type("a1000.00");
+    cy.get("form").submit();
+
+    cy.get("span.error")
+      .should("be.visible")
+      .and("contain", "Please enter a valid number.")
+      .and("contain", "Please enter a valid amount.");
+
+    cy.url().should("include", "/billpay.htm");
+  });
+
+  it("should display error message if account or amount has a letter inputted after first element", () => {
+    //This may be a glitch, but wanted to add a test case to show what happens when account or amount starts with a number, but then a letter is added in.
+    cy.get("div[id=leftPanel]").contains("Bill Pay").click();
+
+    cy.get("input[name=payee\\.name]").type("New Payee");
+    cy.get("input[name=payee\\.address\\.street]").type("1234 Happy Lane");
+    cy.get("input[name=payee\\.address\\.city]").type("Portland");
+    cy.get("input[name=payee\\.address\\.state]").type("OR");
+    cy.get("input[name=payee\\.address\\.zipCode]").type("92103");
+    cy.get("input[name=payee\\.phoneNumber]").type("1-888-486-4567");
+    cy.get("input[name=payee\\.accountNumber]").type("1dddd6789");
+    cy.get("input[name=verifyAccount]").type("1dddd6789");
+    cy.get("input[name=amount]").type("1dd0.00");
+    cy.get("form").submit();
+    cy.wait(500);
+
+    cy.get("p[class=error]").should(
+      "contain",
+      "An internal error has occurred and has been logged."
+    );
+
+    cy.url().should("include", "/billpay.htm");
+  });
+
+  it("should display error message if account number doesn't match verification", () => {
+    //Intentionally made account and verify account different to display error
+    cy.get("div[id=leftPanel]").contains("Bill Pay").click();
+
+    cy.get("input[name=payee\\.name]").type("New Payee");
+    cy.get("input[name=payee\\.address\\.street]").type("1234 Happy Lane");
+    cy.get("input[name=payee\\.address\\.city]").type("Portland");
+    cy.get("input[name=payee\\.address\\.state]").type("OR");
+    cy.get("input[name=payee\\.address\\.zipCode]").type("92103");
+    cy.get("input[name=payee\\.phoneNumber]").type("1-888-486-4567");
+    cy.get("input[name=payee\\.accountNumber]").type("123456789");
+    cy.get("input[name=verifyAccount]").type("353456");
+    cy.get("input[name=amount]").type("1000.00");
+    cy.get("form").submit();
+
+    cy.get("span.error")
+      .should("be.visible")
+      .and("contain", "The account numbers do not match.");
+
+    cy.url().should("include", "/billpay.htm");
+  });
+
   it("should send payment when payee information entered correctly", () => {
     cy.get("div[id=leftPanel]").contains("Bill Pay").click();
 
