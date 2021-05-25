@@ -17,4 +17,12 @@ describe("Open new account", () => {
 
     cy.get("h1").should("contain", "Account Opened!");
   });
+
+  it("client is able to open a savings account", () => {
+    cy.get("ul").contains("Open New Account").click();
+    cy.get("#type").select("1");
+    cy.get("form").contains("Open New Account").click();
+
+    cy.get("h1").should("contain", "Account Opened!");
+  });
 });
