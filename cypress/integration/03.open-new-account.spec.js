@@ -13,16 +13,34 @@ describe("Open new account", () => {
   it("client is able to open a checkings account", () => {
     cy.get("ul").contains("Open New Account").click();
     cy.get("#type").select("0");
+    cy.get("#type").should("have.value", "0");
     cy.get("form").contains("Open New Account").click();
 
+    //Success screen should show and if you click on new account hyperlink you should be take to account details page
     cy.get("h1").should("contain", "Account Opened!");
+    cy.get("b").should("contain", "Your new account number:");
+    cy.get("#newAccountId")
+      .should("have.attr", "href")
+      .and("include", "activity")
+      .then((href) => {
+        cy.visit(href);
+      });
   });
 
   it("client is able to open a savings account", () => {
     cy.get("ul").contains("Open New Account").click();
     cy.get("#type").select("1");
+    cy.get("#type").should("have.value", "1");
     cy.get("form").contains("Open New Account").click();
 
+    //Success screen should show and if you click on new account hyperlink you should be take to account details page
     cy.get("h1").should("contain", "Account Opened!");
+    cy.get("b").should("contain", "Your new account number:");
+    cy.get("#newAccountId")
+      .should("have.attr", "href")
+      .and("include", "activity")
+      .then((href) => {
+        cy.visit(href);
+      });
   });
 });
