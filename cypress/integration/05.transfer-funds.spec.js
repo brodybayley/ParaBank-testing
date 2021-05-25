@@ -19,7 +19,7 @@ describe("Transfer Funds", () => {
     cy.get("#amount\\.errors").should("contain", "The amount cannot be empty.");
   });
 
-  it("should show an error if amount entered is more than 15 numbers", () => {
+  it("should show an error if amount entered is more than 15 numbers in length", () => {
     cy.get("#leftPanel").contains("Transfer Funds").click();
 
     //amount field intentionally left out to trigger error message. Delay required to allow page to fully load before submit or error won't show
