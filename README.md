@@ -2,6 +2,8 @@
 
 Cypress automated smoke test suite created exclusively for Parabank.
 
+# Example Screenshots
+
 !["Screenshot of Cypress passing tests"](https://github.com/brodybayley/ParaBank-testing/blob/main/docs/passed-tests.png)
 
 !["Screenshot of Cypress integration tests"](https://github.com/brodybayley/ParaBank-testing/blob/main/docs/integration-tests.png)
