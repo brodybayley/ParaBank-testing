@@ -1,4 +1,4 @@
-describe("Open new account", () => {
+describe("open new account", () => {
   const username = Cypress.env("username");
   const password = Cypress.env("password");
 
@@ -16,7 +16,7 @@ describe("Open new account", () => {
     cy.get("#type").should("have.value", "0");
     cy.get("form").contains("Open New Account").click();
 
-    //Success screen should show and if you click on new account hyperlink you should be take to account details page
+    //Success screen should show and if you click on new account hyperlink you should be taken to account details page
     cy.get("h1").should("contain", "Account Opened!");
     cy.get("b").should("contain", "Your new account number:");
     cy.get("#newAccountId")
@@ -33,7 +33,7 @@ describe("Open new account", () => {
     cy.get("#type").should("have.value", "1");
     cy.get("form").contains("Open New Account").click();
 
-    //Success screen should show and if you click on new account hyperlink you should be take to account details page
+    //Success screen should show and if you click on new account hyperlink you should be taken to account details page
     cy.get("h1").should("contain", "Account Opened!");
     cy.get("b").should("contain", "Your new account number:");
     cy.get("#newAccountId")

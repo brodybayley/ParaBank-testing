@@ -1,22 +1,10 @@
-describe("New user registration", () => {
+describe("registration", () => {
   beforeEach(function () {
     cy.visit("/register.htm");
   });
 
-  it("displays errors when incomplete registration", () => {
-    //Intentionally left out the SSN field so that the validation would fail and display error message
-    cy.get("input[name=customer\\.firstName]").type("Para");
-    cy.get("input[name=customer\\.lastName]").type("Bank");
-    cy.get("input[name=customer\\.address\\.street]").type(
-      "101 E. Huntington Drive"
-    );
-    cy.get("input[name=customer\\.address\\.city]").type("Monrovia");
-    cy.get("input[name=customer\\.address\\.state]").type("CA");
-    cy.get("input[name=customer\\.address\\.zipCode]").type("91016");
-    cy.get("input[name=customer\\.phoneNumber]").type("1-888-305-0041");
-    cy.get("input[name=customer\\.username]").type("Invalid Account");
-    cy.get("input[name=customer\\.password]").type("Fake Passw0rd");
-    cy.get("input[name=repeatedPassword]").type("Fake Passw0rd");
+  it("should display errors when incomplete registration", () => {
+    //Intentionally left all fields out so errors would show
     cy.get("form").contains("Register").click();
 
     cy.get("span.error")
@@ -26,8 +14,8 @@ describe("New user registration", () => {
     cy.url().should("include", "/register.htm");
   });
 
-  it("displays error when username already exists", () => {
-    //Using active user as user must already be registered for error to show
+  it("should display error when username already exists", () => {
+    //Using active client as client must already be registered for error to show
     const username = Cypress.env("username");
 
     cy.get("input[name=customer\\.firstName]").type("Para");
@@ -52,8 +40,8 @@ describe("New user registration", () => {
     cy.url().should("include", "/register.htm");
   });
 
-  it("redirects to /register.htm on successful registration", () => {
-    //Generates random users (random set of numbers)
+  it("should redirect to /register.htm on successful registration", () => {
+    //Generates random client ID's for usernames
     const uuid = () => Cypress._.random(0, 1e6);
     const id = uuid();
     const username = id;

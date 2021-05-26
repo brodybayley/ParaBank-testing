@@ -1,8 +1,8 @@
-describe("Accounts Overview", () => {
+describe("accounts overview", () => {
   const username = Cypress.env("username");
   const password = Cypress.env("password");
 
-  it("Should show an error message if not logged in", () => {
+  it("should show an error message if not logged in", () => {
     //user must not be logged in for test to work correctly
     cy.visit("/overview.htm", { failOnStatusCode: false });
 
@@ -12,7 +12,7 @@ describe("Accounts Overview", () => {
       .should("be.visible");
   });
 
-  it("Should access overviews page as a logged in client", () => {
+  it("should access overviews page as a logged in client", () => {
     //client must log in first
     cy.visit("/index.htm");
     cy.get("input[name=username]").type(username);
