@@ -10,8 +10,8 @@ describe("login", () => {
   });
 
   it("should display errors if wrong username and password", () => {
-    cy.get("input[name=username]").type("wrong username");
-    cy.get("input[name=password]").type("wrong password");
+    cy.get("input[name=username]").type("wrong$username");
+    cy.get("input[name=password]").type("wrong$password");
     cy.get("form").contains("Log In").click();
 
     cy.get("p.error")

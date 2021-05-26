@@ -18,6 +18,7 @@
   },
   "homepage": "https://parabank.parasoft.com/parabank/index.htm",
   "devDependencies": {
-    "cypress": "^7.3.0"
+    "cypress": "^7.3.0",
+    "dayjs": "^1.10.4"
   }
 }

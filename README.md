@@ -19,6 +19,7 @@ Cypress automated smoke test suite created exclusively for Parabank.
 ## Dependencies
 
 - Cypress
+- dayjs
 
 ## Using Application
 
