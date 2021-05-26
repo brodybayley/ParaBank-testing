@@ -15,12 +15,12 @@ Cypress automated smoke test suite created exclusively for Parabank.
 3. Once the browser opens you will see a list of integration tests.
 4. Add a `cypress.env.json` file to the project root directory and then create a `.gitignore` and add `/cypress.env.json` to the `.gitignore`.
 5. If you don't already have an account that you would like to use for testing then register a test account before proceeding. Copy the below object and paste it into your `cypress.env.json` file and replace the below highlighted pieces of information from your test account:
-   `{
-   "firstName": "ADD TEST FIRST NAME IN BETWEEN QUOTES",
-   "lastName": "ADD TEST LAST NAME IN BETWEEN QUOTES",
-   "username": "ADD USERNAME IN BETWEEN QUOTES",
-   "password": "ADD PASSWORD"
-   }`
+   `{ "firstName": "ADD TEST FIRST NAME IN BETWEEN QUOTES", "lastName": "ADD TEST LAST NAME IN BETWEEN QUOTES", "username": "ADD USERNAME IN BETWEEN QUOTES", "password": "ADD PASSWORD" }`
+6. Viewport height and width can be adjusted by going to `cypress.json`. Currently it is set to:
+   {
+   "viewportWidth": 1280,
+   "viewportHeight": 720
+   }
 
 ## Dependencies
 
