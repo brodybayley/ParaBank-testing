@@ -59,6 +59,54 @@ describe("Find Transactions", () => {
     cy.url().should("include", "/findtrans.htm");
   });
 
+  it("should show no results if date has no transactions", () => {
+    cy.get("input[id=criteria\\.onDate]").type("05-25-2019");
+    cy.get("button").eq(1).contains("Find Transactions").click();
+
+    cy.get("h1[class=title]").should("contain", "Transaction Results");
+    cy.get("td[class=ng-binding]").should("not.exist");
+    cy.get("a[class=ng-binding").should("not.exist");
+
+    cy.url().should("include", "/findtrans.htm");
+  });
+
+  it("should show no results if date range has no transactions", () => {
+    cy.get("input[id=criteria\\.fromDate]").type("05-15-2019");
+    cy.get("input[id=criteria\\.toDate]").type("05-25-2019");
+    cy.get("button").eq(2).contains("Find Transactions").click();
+
+    cy.get("h1[class=title]").should("contain", "Transaction Results");
+    cy.get("td[class=ng-binding]").should("not.exist");
+    cy.get("a[class=ng-binding").should("not.exist");
+
+    cy.url().should("include", "/findtrans.htm");
+  });
+
+  it("should show an error message if no transaction amount matches inputted amount", () => {
+    cy.get("input[id=criteria\\.amount]").type("299.00");
+    cy.get("button").eq(3).contains("Find Transactions").click();
+
+    cy.get("h1[class=title]").should("contain", "Transaction Results");
+    cy.get("td[class=ng-binding]").should("not.exist");
+    cy.get("a[class=ng-binding").should("not.exist");
+
+    cy.url().should("include", "/findtrans.htm");
+  });
+
+  it("should show an error message when transaction ID doesn't exist", () => {
+    //must input invalid transaction ID
+    cy.get("input[id=criteria\\.transactionId]").type("22025");
+    cy.get("button").eq(0).contains("Find Transactions").click();
+
+    //error message appears, but perhaps a more useful message could show to tell user no transactions found
+    cy.get("p[class=error]").should(
+      "contain",
+      "An internal error has occurred and has been logged."
+    );
+
+    cy.url().should("include", "/findtrans.htm");
+  });
+
   it("should find a transaction by transaction ID", () => {
     //must input an active transaction id in order for test to work
     cy.get("input[id=criteria\\.transactionId]").type("21025");
