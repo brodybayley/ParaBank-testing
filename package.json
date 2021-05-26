@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/brodybayley/ParaBank-testing/issues"
   },
-  "homepage": "https://github.com/brodybayley/ParaBank-testing#readme",
+  "homepage": "https://parabank.parasoft.com/parabank/index.htm",
   "devDependencies": {
     "cypress": "^7.3.0"
   }
