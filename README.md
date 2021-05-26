@@ -2,6 +2,12 @@
 
 Cypress automated smoke test suite created exclusively for Parabank.
 
+# Screenshots
+
+!["Screenshot of Cypress passing tests"](https://github.com/brodybayley/ParaBank-testing/blob/main/docs/passed-tests.png)
+
+!["Screenshot of Cypress integration tests"](https://github.com/brodybayley/ParaBank-testing/blob/main/docs/integration-tests.png)
+
 ## Getting Started
 
 1. Install dependencies with `npm install`.
