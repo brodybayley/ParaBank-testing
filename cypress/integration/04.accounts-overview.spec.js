@@ -3,28 +3,28 @@ describe("accounts overview", () => {
   const password = Cypress.env("password");
 
   it("should show an error message if not logged in", () => {
-    //user must not be logged in for test to work correctly
+    //user must not be logged in for correct results
     cy.visit("/overview.htm", { failOnStatusCode: false });
 
-    //error message should show. Would recommend updating error message to inform client that they need to log in to access this page
+    //error message should show. Would recommend changing error message to inform client that they need to log in to access this page
     cy.get("#rightPanel")
       .contains("An internal error has occurred and has been logged.")
       .should("be.visible");
   });
 
-  it("should access overviews page as a logged in client", () => {
+  it("should access accounts overview page as a logged in client", () => {
     //client must log in first
     cy.visit("/index.htm");
     cy.get("input[name=username]").type(username);
     cy.get("input[name=password]").type(password);
     cy.get("form").contains("Log In").click();
 
-    //After logging in client should be redirected to overview page
+    //Account number should be hyperlinked and balance/available amount should show
+    cy.get("h1[class=title]").should("contain", "Accounts Overview");
+    cy.get("a[class=ng-binding").should("not.have.attr", "href", "undefined");
+    cy.get("td[class=ng-binding]").eq(0).should("not.have.value", "null");
+    cy.get("td[class=ng-binding]").eq(1).should("not.have.value", "null");
+
     cy.url().should("include", "/overview.htm");
-    //Account number should be hyperlinked and take client to /activity page
-    cy.get("#accountTable")
-      .find("a")
-      .should("not.have.attr", "href", "undefined");
-    cy.get("td").find(".ng-binding").should("not.have.value", "null");
   });
 });
