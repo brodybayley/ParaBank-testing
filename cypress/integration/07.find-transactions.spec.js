@@ -10,7 +10,7 @@ describe("Find Transactions", () => {
     cy.get("div[id=leftPanel]").contains("Find Transactions").click();
   });
 
-  it("should find a transaction by ID", () => {
+  it("should find a transaction by transaction ID", () => {
     //must input an active transaction id in order for test to work
     cy.get("input[id=criteria\\.transactionId]").type("21025");
     //looking for first find transaction button
@@ -25,7 +25,7 @@ describe("Find Transactions", () => {
   });
 
   it("should find a transaction by date", () => {
-    //must input a date associated with an active transaction id in order for transactions to show
+    //must input a date associated with an active transaction id in order for results to show
     cy.get("input[id=criteria\\.onDate]").type("05-25-2021");
     cy.get("button").eq(1).contains("Find Transactions").click();
 
@@ -37,10 +37,22 @@ describe("Find Transactions", () => {
   });
 
   it("should find a transaction by date range", () => {
-    //must input a date range ssociated with an active transaction id in order for transactions to show
+    //must input a date range ssociated with an active transaction id in order for results to show
     cy.get("input[id=criteria\\.fromDate]").type("05-15-2021");
     cy.get("input[id=criteria\\.toDate]").type("05-25-2021");
     cy.get("button").eq(2).contains("Find Transactions").click();
+
+    cy.get("h1[class=title]").should("contain", "Transaction Results");
+    cy.get("td[class=ng-binding]").should("not.have.value", "null");
+    cy.get("a[class=ng-binding").should("not.have.attr", "href", "undefined");
+
+    cy.url().should("include", "/findtrans.htm");
+  });
+
+  it("should find a transaction by amount", () => {
+    //must input an amount that is associated with an active transaction id in order for results to show
+    cy.get("input[id=criteria\\.amount]").type("100.00");
+    cy.get("button").eq(3).contains("Find Transactions").click();
 
     cy.get("h1[class=title]").should("contain", "Transaction Results");
     cy.get("td[class=ng-binding]").should("not.have.value", "null");
