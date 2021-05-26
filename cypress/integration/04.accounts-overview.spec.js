@@ -16,7 +16,7 @@ describe("accounts overview", () => {
     //client must log in first
     cy.visit("/index.htm");
     cy.get("input[name=username]").type(username);
-    cy.get("input[name=password]").type(password);
+    cy.get("input[name=password]").type(password, { log: false });
     cy.get("form").contains("Log In").click();
 
     //Account number should be hyperlinked and balance/available amount should show

@@ -1,17 +1,17 @@
-describe("Bill Pay", () => {
+describe("bill pay", () => {
   const username = Cypress.env("username");
   const password = Cypress.env("password");
 
   beforeEach(() => {
     cy.visit("/index.htm");
     cy.get("input[name=username]").type(username);
-    cy.get("input[name=password]").type(password);
+    cy.get("input[name=password]").type(password, { log: false });
     cy.get("form").contains("Log In").click();
+    cy.get("div[id=leftPanel]").contains("Bill Pay").click();
   });
 
   it("should display warning messages when payee information fields left blank", () => {
     //Intentionally didn't input any values into fields so error messages would show
-    cy.get("div[id=leftPanel]").contains("Bill Pay").click();
     cy.get("form").submit();
 
     cy.get("span.error")
@@ -30,8 +30,6 @@ describe("Bill Pay", () => {
 
   it("should display error message if account or amount starts with a letter instead of a number", () => {
     //seems like the error should appear if there is a letter inputted at any point in the account or amount field, but error only appears if the first element is a number.
-    cy.get("div[id=leftPanel]").contains("Bill Pay").click();
-
     cy.get("input[name=payee\\.name]").type("New Payee");
     cy.get("input[name=payee\\.address\\.street]").type("1234 Happy Lane");
     cy.get("input[name=payee\\.address\\.city]").type("Portland");
@@ -53,8 +51,6 @@ describe("Bill Pay", () => {
 
   it("should display error message if account or amount has a letter inputted after first element", () => {
     //This may be a glitch, but wanted to add a test case to show what happens when account or amount starts with a number, but then a letter is added in.
-    cy.get("div[id=leftPanel]").contains("Bill Pay").click();
-
     cy.get("input[name=payee\\.name]").type("New Payee");
     cy.get("input[name=payee\\.address\\.street]").type("1234 Happy Lane");
     cy.get("input[name=payee\\.address\\.city]").type("Portland");
@@ -76,9 +72,7 @@ describe("Bill Pay", () => {
   });
 
   it("should display error message if account number doesn't match verification", () => {
-    //Intentionally made account and verify account different to display error
-    cy.get("div[id=leftPanel]").contains("Bill Pay").click();
-
+    //Intentionally made account and verify account different to display error.
     cy.get("input[name=payee\\.name]").type("New Payee");
     cy.get("input[name=payee\\.address\\.street]").type("1234 Happy Lane");
     cy.get("input[name=payee\\.address\\.city]").type("Portland");
@@ -98,8 +92,6 @@ describe("Bill Pay", () => {
   });
 
   it("should send payment when payee information entered correctly", () => {
-    cy.get("div[id=leftPanel]").contains("Bill Pay").click();
-
     cy.get("input[name=payee\\.name]").type("New Payee");
     cy.get("input[name=payee\\.address\\.street]").type("1234 Happy Lane");
     cy.get("input[name=payee\\.address\\.city]").type("Portland");

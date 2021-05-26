@@ -35,7 +35,7 @@ describe("login", () => {
   it("should redirect to /overview.htm on successful login", () => {
     //username and password pulled from cypress.env.json
     cy.get("input[name=username]").type(username);
-    cy.get("input[name=password]").type(password);
+    cy.get("input[name=password]").type(password, { log: false });
     cy.get("form").contains("Log In").click();
 
     //should be redirected to overview page with welcome message on left panel

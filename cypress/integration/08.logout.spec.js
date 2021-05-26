@@ -1,10 +1,10 @@
-describe("Logout", () => {
+describe("logout", () => {
   const username = Cypress.env("username");
   const password = Cypress.env("password");
 
   beforeEach(() => {
     cy.visit("/index.htm");
-    cy.get("input[name=username]").type(username);
+    cy.get("input[name=username]").type(username, { log: false });
     cy.get("input[name=password]").type(password);
     cy.get("form").contains("Log In").click();
   });

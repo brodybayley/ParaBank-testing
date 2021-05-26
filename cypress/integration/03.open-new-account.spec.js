@@ -6,7 +6,7 @@ describe("open new account", () => {
     cy.visit("/index.htm");
     //username and password pulled from cypress.env.json
     cy.get("input[name=username]").type(username);
-    cy.get("input[name=password]").type(password);
+    cy.get("input[name=password]").type(password, { log: false });
     cy.get("form").contains("Log In").click();
   });
 

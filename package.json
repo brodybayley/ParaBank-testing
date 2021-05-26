@@ -1,7 +1,7 @@
 {
   "name": "parabank-testing",
   "version": "1.0.0",
-  "description": "",
+  "description": "Cypress test cases developed exclusively for ParaBank",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/brodybayley/ParaBank-testing.git"
   },
-  "author": "",
+  "author": "brody",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/brodybayley/ParaBank-testing/issues"
