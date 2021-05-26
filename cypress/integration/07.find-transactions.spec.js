@@ -10,7 +10,20 @@ describe("Find Transactions", () => {
     cy.get("div[id=leftPanel]").contains("Find Transactions").click();
   });
 
-  it("should show an error message non numbers are inputted into find by transaction ID", () => {
+  it("should display error message below input field when left blank", () => {
+    //comparing length of input before error message appears and after message appears.
+    cy.get("input:invalid").should("have.length", 0);
+    cy.get("button").eq(0).contains("Find Transactions").click();
+    cy.get("input:invalid").should("have.length", 1);
+    //comparing input[0] to expected string and should equal the same
+    cy.get("input[id=criteria\\.transactionId]").then(($input) => {
+      expect($input[0].validationMessage).to.eq("Please fill out this field.");
+    });
+
+    cy.url().should("include", "/findtrans.htm");
+  });
+
+  it("should show an error message when non numbers are inputted into find by ID", () => {
     cy.get("input[id=criteria\\.transactionId]").type("2V02F");
     cy.get("button").eq(0).contains("Find Transactions").click();
 
