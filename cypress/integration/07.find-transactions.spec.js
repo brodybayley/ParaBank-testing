@@ -23,4 +23,18 @@ describe("Find Transactions", () => {
 
     cy.url().should("include", "/findtrans.htm");
   });
+
+  it("should find a transaction by date", () => {
+    //must input a date associated with an active transaction id in order for transactions to show
+    cy.get("input[id=criteria\\.onDate]").type("05-25-2021");
+    //looking for second find transaction button
+    cy.get("button").eq(1).contains("Find Transactions").click();
+
+    //checking that date is shown and "fund transfer sent" is active link
+    cy.get("h1[class=title]").should("contain", "Transaction Results");
+    cy.get("td[class=ng-binding]").should("not.have.value", "null");
+    cy.get("a[class=ng-binding").should("not.have.attr", "href", "undefined");
+
+    cy.url().should("include", "/findtrans.htm");
+  });
 });
